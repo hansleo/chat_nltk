@@ -26,20 +26,22 @@ def simplify(sentence):
 def stop_word_processing(sentence):
     postag = nltk.pos_tag(nltk.word_tokenize(sentence))
     stop_tag_list = ['RB', 'LS', 'FW', 'UH']
-    print(postag)
+    # print(postag)
     sentence = sentence.replace(' is', "'s")
     sentence = sentence.replace(' am', "'m")
+
     for letter in sentence:
         if not(letter.isalnum()):
             if letter == "'" or letter == ' ':
                 continue
             sentence = sentence.replace(letter, '')
     for item in postag:
-        if item[1] == 'RB' or item[1] == 'LS' or item[1] == 'FW' or item[1] == 'UH':
+        if item[1] in stop_tag_list:
             sentence = sentence.replace(item[0], '')
 
     sentence = sentence.strip()
     sentence = sentence.replace('  ', ' ')
+    # print(sentence)
     return sentence
 
 
